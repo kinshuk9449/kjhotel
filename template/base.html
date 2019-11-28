@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>{% block title %}KJ HOTEL BOOKING{% endblock %}</title>
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+    </head>
+    <body>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#"><img src="{% static 'images/logo5.png' %}" style="width:150px;height:100px;"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+            <li 
+            {% if '/' == request.path %} 
+             class="nav-item active"
+            {% else %}
+             class="nav-item"
+            {% endif %}>
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            {% if user.is_authenticated %}
+            <ul class="nav navbar-nav navbar-right">
+                <li 
+                {% if 'oldbooking' in request.path %} 
+                 class="nav-item active"
+                {% else %}
+                 class="nav-item"
+                {% endif %}
+                >
+                  <a class="nav-link" href="oldbooking">Your Bookings</a>
+                </li>
+            <li >
+              <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">Log Out</a>
+              <form action="{% url 'logout' %} " method="POST" id="logout">{% csrf_token %}</form>
+            </li>
+           
+            <li >
+                <a class="nav-link" >Hi {{user.first_name}} {{user.last_name}}!!!
+                {% for show in contacts %}        
+   
+                <img src="{media/{{show.profile}}}" style="width:100px;height:50px;">{% endfor %}</a>
+            </li>
+            {% else %}
+            <li 
+            {% if 'login' in request.path %} 
+             class="nav-item active"
+            {% else %}
+             class="nav-item"
+            {% endif %}
+            >
+              <a class="nav-link" href="login">Log In</a>
+            </li>
+            <li {% if 'register' in request.path %} 
+             class="nav-item active"
+            {% else %}
+             class="nav-item"
+            {% endif %}
+            >
+              <a class="nav-link" href="register">Register</a>
+              
+            </li>
+        
+            {% endif %}
+          </ul>
+
+        </div>
+      </nav>
+      <form method="POST">{% csrf_token %}<label name=email>{{user.email}}</label></form>
+        <br><br><br><br><br><br><br>
+        {% include 'alerts.html' %}
+        <div class='name'>
+        <center><h1>KJ HOTEL BOOKING</h1></center><br><br>
+      </div>{% block content %}
+        {% endblock %}
+        <div class="row" style="background-color: #b60809; margin-bottom:0%;">
+          <div class="container">
+              <div class="col-lg-6 Conv_calibril " style="color:#fff; font-size:15px;">
+                  All Rights Reserved By &copy; KJ HOTEL BOOKING
+              </div>
+    </body>
+</html>

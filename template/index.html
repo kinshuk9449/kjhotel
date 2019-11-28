@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+        <img src="{% static 'images/back.png' %}"style="width:550px;height:400px;">
+        <div class="pl-5 p-5 bg-warning">
+         <h3> <p class="text-success">Select city:</p></h3>
+         {% if user.is_authenticated %}
+          <p><a href="hyderabad">Hyderabad</a></p>
+          <p><a href="mumbai">Mumbai</a></p>
+          <p><a href="ludhiana">Ludhiana</a><br></p>
+          <p><a href="delhi">Delhi</a><br></p>
+          {% else %}
+          <p><h2>Please login to select city:</h2></p>
+          {% endif %}
+</div>
+{% endblock %}

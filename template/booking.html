@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<form method="POST">{% csrf_token %}{% for get in detail_list %}
+    <label for="city"><b>City:</b></label>
+    <input type="text" name='city' value='{{get.city}}' readonly >
+     
+    <label for="hotel_name"><b>Hotel:</b></label>
+    <input type="text" name='hotel_name' value='{{get.hotel_name}}' readonly >
+
+        <label for="price"><h4>Price:</h4></label>
+        <input type="text" name='price' id="price" value='{{get.price}}' oninput="calculate();" readonly >
+        {% endfor %}
+    <label for="room"><b>Rooms: (one room is for two persons)</b></label>
+    <input type="text" placeholder="No. of Rooms" name="room" id="room" value="0" required>
+
+    <label for="checkin"><b>Check In Date:</b></label><br>
+    <input type="date" placeholder="Select Check In Date" name="checkin" id="checkin"  required><br><br>
+
+    <label for="checkout"><b>Check Out Date:</b></label><br>
+    <input type="date" placeholder="Select Check Out Date" name="checkout" id="checkout" oninput="calculate();" required><br><br><br>
+
+        <label for="tamount"><h4>Total Amount:</h4></label>
+        <input type="text" name='total' value='0' id='total' readonly>
+    
+
+    <div >
+        <button type="submit" class="signupbtn" disabled id="book">Book Hotel</button><br><br><br>
+      </div>
+</form>
+<script>
+    function calculate(){
+        room= document.getElementById('room').value;
+        price= document.getElementById('price').value;
+        var checki = new Date(document.getElementById('checkin').value);
+        var checko = new Date(document.getElementById('checkout').value);
+        var d = new Date();
+        day1 = checko-checki;
+        d1 = checki - d
+        day = day1/ (1000 * 3600 * 24)
+        if (day<=0 || d1<=0){
+        alert('Please enter appropriate dates!!!')
+        }
+        else{
+        total= price*room*day;
+        document.getElementById('total').value=total;
+        var bt =document.getElementById('book');
+        bt.disabled=false;
+        }
+    }
+</script>
+
+{% endblock %}

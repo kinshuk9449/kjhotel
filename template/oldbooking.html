@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>Your previous bookings.
+</h1>
+{% if data_list %}
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Hotel</th>
+        <th>Check In Date</th>
+        <th>Check Out Date</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for show in data_list %}
+<tr>
+    <td>{{show.hotel}}</td>
+    <td>{{show.checkin}} </td>
+    <td>{{show.checkout}}</td>
+    <td>{{show.amount}}</td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<h5>No Booking has been made till now:</h5>
+{% endif %}
+{% endblock %}

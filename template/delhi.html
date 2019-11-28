@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="p-3 mb-2 bg-light text-dark"><h2>You have searched for hotels in: Delhi </h2></div>
+<br><br>
+{% for show in detail_list %}
+<div class="p-3 mb-2 bg-light text-dark">
+  <h3> {{show.hotel_name}}</h3>
+  <img src="{% static 'images/stars.png' %}"><br>
+  <img src= 'media/{{show.pic1}}' style="width:400px;height:200px;">
+  <img src= 'media/{{show.pic2}}' style="width:400px;height:200px;">
+  <img src= 'media/{{show.pic3}}' style="width:400px;height:200px;"><br><br>
+  <img src= 'media/{{show.pic4}}' style="width:400px;height:200px;">
+  <img src= 'media/{{show.pic5}}' style="width:400px;height:200px;">
+  <img src= 'media/{{show.pic6}}' style="width:400px;height:200px;"><br>
+  <a href="{% url 'booking' show.hotel_name %}"><div class="clearfix">
+    <button type="submit" class="signupbtn">Book Hotel</button>
+  </div></a><br>
+  <h3>Price:</h3><h5>{{show.price}}/night/room</h5><br>
+  <img src="{% static 'images/swimming.png' %}">
+    <br>
+  </div>
+{% endfor %}
+{% endblock %}
