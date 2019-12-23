@@ -1,5 +1,6 @@
 # kjhotel
 run the following commands
+
 python -m venv nenv
 
 source nenv/Scripts/activate
