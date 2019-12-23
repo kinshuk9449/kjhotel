@@ -5,6 +5,8 @@ python -m venv nenv
 
 source nenv/Scripts/activate
 
+pip install -r requirements.txt
+
 py manage.py collectstatic
 
 py manage.py makemigrations
